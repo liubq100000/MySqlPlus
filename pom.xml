@@ -3,7 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xy</groupId>
     <artifactId>MySqlPlus</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <modules>
+        <module>MySqlPlus-Parse</module>
+        <module>MySqlPlus-Build</module>
+        <module>MySqlPlus-Test</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>com.googlecode.aviator</groupId>

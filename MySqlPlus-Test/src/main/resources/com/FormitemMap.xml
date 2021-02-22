@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="workflow_form_formitem_mapper">
+	<model id="workflow_form_formitem_model">
+		<item name="id" type="String"/>
+		<item name="formId" type="String" />
+		<item name="itemName" type="String" />
+		<item name="columnName" type="String" />
+		<item name="formName" type="String" />
+		<item name="type" type="String" />
+		<item name="createTime" type="Datetime" format="yyyy-MM-dd HH:mm:ss" />
+		<item name="createTimeBegin" type="Datetime" format="yyyy-MM-dd HH:mm:ss" />
+		<item name="createTimeEnd" type="Datetime" format="yyyy-MM-dd HH:mm:ss" />
+	</model>
+
+	<insert id="insert" parameterType="Map">
+		INSERT INTO workflow_form_formitem(ID,FORM_ID,ITEM_NAME,COLUMN_NAME,FORM_NAME,TYPE,CREATE_TIME )
+		VALUES (#{id,function="AUTO_INCREMENT"},#{formId},#{itemName},#{columnName},#{formName},#{type},#{createTime} )
+	</insert>
+
+	<update id="update" parameterType="Map">
+		UPDATE workflow_form_formitem
+		<set>
+			<if test="formId != null">
+				FORM_ID = #{formId},
+			</if>
+			<if test="itemName != null">
+				ITEM_NAME = #{itemName},
+			</if>
+			<if test="columnName != null">
+				COLUMN_NAME = #{columnName},
+			</if>
+			<if test="formName != null">
+				FORM_NAME = #{formName},
+			</if>
+			<if test="type != null">
+				TYPE = #{type},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="Map">
+		delete from workflow_form_formitem  where id = #{id}
+	</delete>
+
+	<sql id="queryFromWhereSql">
+		FROM workflow_form_formitem t
+		<where>
+			<if test="id != null">
+				and t.ID = #{id}
+			</if>
+			<if test="formId != null">
+				and t.FORM_ID = #{formId}
+			</if>
+			<if test="itemName != null">
+				and t.ITEM_NAME = #{itemName}
+			</if>
+			<if test="columnName != null">
+				and t.COLUMN_NAME = #{columnName}
+			</if>
+			<if test="formName != null">
+				and t.FORM_NAME = #{formName}
+			</if>
+			<if test="type != null">
+				and t.TYPE = #{type}
+			</if>
+			<if test="createTime != null">
+				and t.CREATE_TIME = #{createTime}
+			</if>
+			<if test="createTimeBegin != null">
+				and t.CREATE_TIME &gt;= #{createTimeBegin}
+			</if>
+			<if test="createTimeEnd != null">
+				and t.CREATE_TIME &gt;= #{createTimeEnd}
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" parameterType="Map" resultType="Map">
+		SELECT
+		t.ID id,
+		t.FORM_ID formId,
+		t.ITEM_NAME itemName,
+		t.COLUMN_NAME columnName,
+		t.FORM_NAME formName,
+		t.TYPE type,
+		t.CREATE_TIME createTime
+		<include refid="queryFromWhereSql"/>
+		<if test="orderBy != null">
+			order by ${orderBy}
+		</if>
+	</select>
+
+	<select id="queryCount" parameterType="Map" resultType="java.lang.Long">
+		SELECT count(t.ID)
+		<include refid="queryFromWhereSql"/>
+	</select>
+
+</mapper>
