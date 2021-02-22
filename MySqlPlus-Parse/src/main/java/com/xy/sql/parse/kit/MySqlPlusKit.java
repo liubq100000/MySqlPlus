@@ -250,7 +250,6 @@ public class MySqlPlusKit {
                     paramList.add(fvo.getValue());
                 }
             }
-
         }
         return new SqlVO(sql.toString(), paramList);
     }
@@ -278,7 +277,9 @@ public class MySqlPlusKit {
                 resMap.put(entry.getKey(), convertValue(type, value));
             }
         }
-        return resMap;
+        //重新赋值
+        inParamters.putAll(resMap);
+        return inParamters;
     }
 
     /**

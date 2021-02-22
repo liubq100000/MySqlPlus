@@ -94,6 +94,7 @@ public class FieldFragment implements IFragment {
         if (direct) {
             return Arrays.asList(new SqlExePara(newValue.toString(), null));
         }
+        paraMap.put(fieldName,newValue);
         return Arrays.asList(new SqlExePara(" ? ", newValue, true));
 
     }

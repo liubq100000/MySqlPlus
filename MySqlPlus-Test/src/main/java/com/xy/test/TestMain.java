@@ -44,8 +44,8 @@ public class TestMain {
             }
 //            BusiDao.execute(TestConnUtil.getConn(),"workflow_form_formitem_mapper.update", p1);
 //            System.out.println("插入完成");
-//            BusiDao.execute(TestConnUtil.getConn(),"workflow_form_formitem_mapper.insert", p);
-//            System.out.println("插入完成");
+            BusiDao.execute(TestConnUtil.getConn(),"workflow_form_formitem_mapper.insert", p);
+            System.out.println("插入完成");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
